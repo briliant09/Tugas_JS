@@ -516,7 +516,7 @@ button {
 .partner_text {
     width: 100%;
     float: left;
-    font-size: 40px;
+    font-size: px;
     color: #fffcf4;
     font-weight: bold;
 }
