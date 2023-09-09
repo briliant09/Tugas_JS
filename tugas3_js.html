@@ -1,0 +1,63 @@
+<table style="padding: 10; text-align: center; width: 100%;">
+    <thead>
+        <tr>
+            <th>Pegawai</th>
+            <th>Jabatan</th>
+            <th>Gaji Pokok</th>
+            <th>Tunjangan Jabatan</th>
+            <th>Tunjangan Kesehatan</th>
+            <th>Gaji Kotor</th>
+            <th>Zakat Profesi</th>
+            <th>Take Home Pay</th>
+        </tr>
+    </thead>
+<tbody>
+
+<script>
+    var p = ['pegawai1', 'pegawai2', 'pegawai3',
+            'pegawai4', 'pegawai5', 'pegawai6',
+            'pegawai7', 'pegawai8', 'pegawai9', 'pegawai10']
+    for (var i = 0; i < p.length; i++){
+        var pegawai = p[i];
+        var jabatan = ' ';
+        var gapok = 0;
+
+      if(i < 2) jabatan = 'manager';
+      else if (i < 5) jabatan = 'asisten manager';
+      else if (i < 8) jabatan = 'supervisor';
+      else if (i < 10) jabatan = 'staff';
+
+        switch(jabatan){
+            case 'manager' : gapok = 15000000 ; break;
+            case 'asisten manager' : gapok = 10000000 ; break;
+            case 'supervisor' : gapok = 7000000 ; break;
+            case 'staff' : gapok = 4000000 ; break;
+            default : gapok = 0 ; break;
+            }
+    
+
+    var tunjanganJabatan = 0.2 * gapok;
+    var tunjangankesehatan = 0.1 * gapok;
+    var gajiKotor = gapok + tunjanganJabatan + tunjangankesehatan;
+
+    var agama = i % 2 === 1 ? 'nonmuslim' : 'muslim';
+    var warna = agama == 'nonmuslim' ? 'blue' : 'yellow';
+    var zakat = agama == 'muslim' && gajiKotor >= 7000000 ? 0.025 * gajiKotor : 0;
+   
+    var takehomepay = gajiKotor - zakat;
+    
+    document.write(`<tr bgcolor="${warna}">
+                <td>${pegawai}</td>
+                <td>${jabatan}</td>
+                <td>${gapok} </td>
+                <td>${tunjanganJabatan}</td>
+                <td>${tunjangankesehatan}</td>
+                <td>${gajiKotor}</td>
+                <td>${zakat}</td>
+                <td>${takehomepay}</td>
+
+               </tr> `);    
+    }
+</script>
+</tbody>
+</table>
