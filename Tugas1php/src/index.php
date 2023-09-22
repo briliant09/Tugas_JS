@@ -53,20 +53,22 @@
 						<dd>
                         <?php
 
-                            $namaSiswa = "Budi Santoso";
-                            $umur = 20;
-                            $berat_badan = 30.5;
+                            $nama = "Brilian Wahyu Hidayat";
+                            $umur = 21;
+                            $berat_badan = 50;
                             $_pekerjaan = 'Mahasiswa';
-                            $tes = $namaSiswa.$_pekerjaan;
+                            $email = "brilianwhidayat@gmail.com";
+							$alamat = "Lampung";
+							$nohp = "085658856864";
+							
 
-
-                            echo 'Nama Siswa: '.$namaSiswa;
+                            echo 'Nama : '.$nama;
                             echo '<br/>Umur: '.$umur.' tahun';
-                            echo '<br/>Berat Badan 1: '.$berat_badan.'kg';
-                            echo '<br/>Berat Badan 2: '.$berat_badan. 'kg';
-                            echo '<br/>Berat Badan 3: '.$berat_badan. 'kg';
-                            echo '<br/>Pekerjaan 1: '.$_pekerjaan;
-                            print '<br/>Pekerjaan 2: '.$_pekerjaan;
+                            echo '<br/>Berat Badan : '.$berat_badan.'kg';
+                            echo '<br/>Pelkerjaan : '.$_pekerjaan;
+                            echo '<br/>email : '.$email;
+                            echo '<br/>Alamat : '.$alamat;
+                            print '<br/>Nomor telpon: '.$nohp;
 
                             ?>
 							</script>
