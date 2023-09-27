@@ -1,0 +1,35 @@
+
+.social_icon {
+    width: 15%;
+    margin: 0 auto;
+    text-align: center;
+}
+.social_icon {
+    width: 25%;
+}
+.social_icon {
+    width: 27%;
+}
+.social_icon {
+    width: 37%;
+}
+.social_icon {
+    width: 60%;
+}
+#header , #footer {
+    background-color: rgb(45, 44, 42);
+    color:rgb(255, 255, 255);
+}
+.h1 {
+    color: rgb(255, 255, 255);
+}
+#home , #portofolio , #contact{
+    background-color: #143b2d;
+    color: #f8efe8;
+}
+#quote {
+    background-color: #ea604d;
+}
+#desc , #nav {
+    background-color: #f1cf71;
+}
