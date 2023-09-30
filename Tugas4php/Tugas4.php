@@ -46,7 +46,7 @@ if(isset($_POST['login'])){
         header("Location: admin.php");
         exit();
     } else {
-        echo "<color=red>username atau password salah, coba lagi.";
+        echo "username atau password salah, coba lagi.";
     }
 }
 ?>
