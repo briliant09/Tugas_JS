@@ -1,0 +1,72 @@
+Capture-lah perintah2 SQL dan beri komentar pada perintah queri berikut ini:
+
+-- Masuk ke ruang DB melalui CMD
+    mysql -u root -p
+
+-- Tampilkan database yang sudah dibuat
+    SHOW DATABASES;
+
+-- Buat database baru: dbpegawai
+    CREATE DATABASE dbpegawai;
+
+-- Masuk ke ruang database dbpegawai
+    USE dbpegawai;
+
+-- Tampilkan tabel-tabel yang sudah ada di dbpegawai
+    SHOW TABLES;
+
+-- Buat tabel pegawai field-field:
+    1. id int primary key
+
+    2. nip char dengan constraint: wajib diisi, tidak boleh sama & 5 karakter
+
+    3. nama varchar dengan constraint: wajib diisi dan maksimal 30 karakter
+
+    4. gender enum('L','P') dengan constraint: wajib diisi
+
+    5. umur int dengan constraint: wajib diisi
+
+    6. berat_badan float
+
+    CREATE TABLE pegawai (
+    id INT PRIMARY KEY,
+    nip CHAR(5) NOT NULL UNIQUE,
+    nama VARCHAR(30) NOT NULL,
+    gender ENUM('L','P') NOT NULL,
+    umur INT NOT NULL,
+    berat_badan FLOAT
+    );
+
+-- Tampilkan database yang sudah dibuat
+    SHOW DATABASES;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | brilian            |
+    | dbpegawai          |
+    | information_schema |
+    | kendaraan          |
+    | minimarket         |
+    | mysql              |
+    | pegawaisib5        |
+    | performance_schema |
+    | perpus             |
+    | phpmyadmin         |
+    | test               |
+    | tokosib5           |
+    | travel_db          |
+    | wp_dataian         |
+    +--------------------+
+
+-- Lihat deskripsi tabel pegawai yang sudah dibuat
+    DESCRIBE pegawai;
+    +-------------+---------------+------+-----+---------+-------+
+    | Field       | Type          | Null | Key | Default | Extra |
+    +-------------+---------------+------+-----+---------+-------+
+    | id          | int(11)       | NO   | PRI | NULL    |       |
+    | nip         | char(5)       | NO   | UNI | NULL    |       |
+    | nama        | varchar(30)   | NO   |     | NULL    |       |
+    | gender      | enum('L','P') | NO   |     | NULL    |       |
+    | umur        | int(11)       | NO   |     | NULL    |       |
+    | berat_badan | float         | YES  |     | NULL    |       |
+    +-------------+---------------+------+-----+---------+-------+
