@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 6 JS</title>
+    <link rel="stylesheet" href="css/styletugas6.css">
+    <script src="js/tugas6.js"></script>
+    <script type="text/javascript">
+        $("document").ready (function(){
+            $("#div1").mousedown(function(){
+                $(this).css({
+                    background: "url('images/Profil.jpg')"
+                });
+            });
+            $("div").mouseleave(function(){
+                $(this).css({
+                    background: "#1B2431"
+                });
+            });
+            $("#div2").mousedown(function(){
+                $(this).css({
+                    background: "url('images/Motto.jpg')"
+                });
+            });
+            $("#div3").mousedown(function(){
+                $(this).css({
+                    background: "url('images/Keahlian.jpg')"
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    
+    <h2>Klik salah satu bidang untuk lebih detail</h2>
+
+    <div id="div1">Profil</div>
+    <div id="div2">Motto Hidup</div>
+    <div id="div3">Keahlian</div>
+</body>
+</html>
