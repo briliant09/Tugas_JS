@@ -1,0 +1,36 @@
+- buat table pembelian :
+
+CREATE TABLE pembelian (
+    tanggal DATE NOT NULL,
+    nomor INT PRIMARY KEY,
+    produk_id INT NOT NULL REFERENCES produk(id),
+    jumlah INT NOT NULL,
+    harga double NOT NULL,
+    vendor_id INT NOT NULL REFERENCES vendor(nomor)
+    );
+
+- buat table vendor :
+
+CREATE TABLE vendor (
+    nomor INT PRIMARY KEY REFERENCES pembelian(vendor_id),   
+    nama VARCHAR(255) NOT NULL,
+    kota VARCHAR(100),
+    kontak VARCHAR(255),
+);
+
+- isi data pembelian :
+INSERT INTO pembelian (tanggal, nomor, produk_id, jumlah, harga, vendor_id) VALUES
+    ('2023-12-24', 1, 101, 10, 100000, 201),
+    ('2023-09-05', 2, 102, 5, 100000, 202),
+    ('2023-04-15', 3, 103, 8, 80000, 203),
+    ('2023-03-20', 4, 104, 12, 20000, 204),
+    ('2023-01-01', 5, 105, 6, 60000, 205);
+
+-isi data vendor :
+INSERT INTO vendor (nomor, nama, kota, kontak)
+VALUES
+    (201, 'Vendor A', 'Tulang Bawang Barat', '08584646546'),
+    (202, 'Vendor B', 'Lampung Utara', '08468413138'),
+    (203, 'Vendor C', 'Kota Metro', '084956121'),
+    (204, 'Vendor D', 'Kota Bandar Lampung', '089451321'),
+    (205, 'Vendor E', 'Kota Liwa', '0846541321');
