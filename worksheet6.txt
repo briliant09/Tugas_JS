@@ -1,0 +1,100 @@
+-- function
+
+MariaDB [dbkoperasi]> delimiter $$
+MariaDB [dbkoperasi]> create function umur(tgl_lahir date)
+    -> returns int
+    -> begin
+    -> declare umur int;
+    -> set umur = year(curdate()) - year(tgl_lahir);
+    -> return umur;
+    -> end $$
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [dbkoperasi]> delimiter ;
+MariaDB [dbkoperasi]> select kode, nama, jk, umur(tgl_lahir) as umur from pe
+langgan;
++------+---------------+------+------+
+| kode | nama          | jk   | umur |
++------+---------------+------+------+
+| C001 | Agung Sedayu  | L    |   13 |
+| C002 | Pandan Wangi  | P    |   73 |
+| C003 | Sekar Mirah   | P    |   40 |
+| C004 | Swandaru Geni | L    |   42 |
+| C005 | Pradabashu    | L    |   38 |
+| C006 | Gayatri Dwi   | P    |   36 |
+| C007 | Dewi Gyat     | P    |   35 |
+| C008 | Andre Haru    | L    |   33 |
+| C009 | Ahmad Hasan   | L    |   31 |
+| C010 | Cassanndra    | P    |   33 |
++------+---------------+------+------+
+10 rows in set (0.013 sec)
+
+-- trigger
+
+MariaDB [dbkoperasi]> select * from pesanan;
++----+------------+---------+--------------+
+| id | tanggal    | total   | pelanggan_id |
++----+------------+---------+--------------+
+|  1 | 2015-11-04 | 9720000 |            1 |
+|  2 | 2015-11-04 |   17500 |            3 |
+|  3 | 2015-11-04 |       0 |            6 |
+|  4 | 2015-11-04 |       0 |            7 |
+|  5 | 2015-11-04 |       0 |           10 |
+|  6 | 2015-11-04 |       0 |            2 |
+|  7 | 2015-11-04 |       0 |            5 |
+|  8 | 2015-11-04 |       0 |            4 |
+|  9 | 2015-11-04 |       0 |            8 |
+| 10 | 2015-11-04 |       0 |            9 |
+| 11 | 2015-11-04 |   30000 |            9 |
++----+------------+---------+--------------+
+11 rows in set (0.001 sec)
+
+MariaDB [dbkoperasi]> delimiter $$
+MariaDB [dbkoperasi]> create trigger cek_pembayaran before insert on pembayaran
+    -> for each row
+    -> begin
+    -> declare total_bayar decimal(10, 2);
+    -> declare total_pesanan decimal(10, 2);
+    -> select sum(jumlah) into total_bayar from pembayaran where pesanan_id = new.pesanan_id;
+    -> select total into total_pesanan from pesanan where id = new.pesanan_id;
+    -> if total_bayar + new.jumlah >= total_pesanan then
+    -> set new.status_pembayaran = 'lunas';
+    -> end if;
+    -> end $$
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [dbkoperasi]> delimiter ;
+MariaDB [dbkoperasi]> insert into pembayaran (nokuitansi, tanggal, jumlah, ke, pesanan_id, status_pembayaran)
+    -> values ('KW001', '2023-12-24', 59200,1,1,'');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [dbkoperasi]> select * from pembayaran;
++----+------------+------------+--------+------+------------+-------------------+
+| id | nokuitansi | tanggal    | jumlah | ke   | pesanan_id | status_pembayaran |
++----+------------+------------+--------+------+------------+-------------------+
+|  1 | KW001      | 2023-12-24 |  59200 |    1 |          1 |
+    |
++----+------------+------------+--------+------+------------+-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [dbkoperasi]> delimiter $$
+MariaDB [dbkoperasi]> create procedure kurangi_stok(in produk_id int, in jumlah int)
+    -> begin
+    -> declare stok_produk int;
+    -> select stok into stok_produk from produk where id = produk_id;
+    -> if stok_produk >= jumlah then
+    -> update produk set stok = stok_produk - jumlah where id = produk_id;
+    -> select 'stok berhasil dikurangi satu' as status;
+    -> else
+    -> select 'stok tidak mencukupi' as status;
+    -> end if;
+    -> end $$
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [dbkoperasi]> delimiter $$
+MariaDB [dbkoperasi]> create trigger trig_kurangi_stok after insert on pesanan
+    -> for each row
+    -> begin
+    -> call kurangi_stok(new.id);
+    -> end $$
+Query OK, 0 rows affected (0.011 sec)
